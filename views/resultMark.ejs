@@ -15,18 +15,16 @@
     <div class="card custumCard" style="width: 23rem;">
       <div class="card-body">
         <h5 class="card-title">Congratulations 🎉</h5>
-        <p class="card-text">you are get mark 12 from 20
+        <p class="card-text">you are get mark <%=quiz.studentGrade%> from <%=quiz.grade%>
 
         </p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Questions answered : 12</li>
-        <li class="list-group-item">Unanswered questions : 2</li>
-        <li class="list-group-item">The wrong questions : 6</li>
+        <li class="list-group-item">Questions answered : <%=answered%></li>
+        <li class="list-group-item">The wrong questions : <%=wrong%></li>
       </ul>
       <div class="card-body">
-        <a href="#" class="btn btn-success ">back to Quizs page</a>
-        <a href="#" class="btn btn-info">review Quiz </a>
+        <a href="/" class="btn btn-success ">back to Quizs page</a>
       </div>
     </div>
   </div>

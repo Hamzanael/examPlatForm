@@ -25,20 +25,23 @@ function examExtractor(path, data, Quiz, Course, res) {
                     }
 
                     tmp("li").each(function () {
-                        obj.choices.push(tmp(this).html())
+                        obj.choices.push({
+                            choise: tmp(this).html(),
+                            coiseNumber: obj.choices.length
+                        })
                     })
                     readyQuestions.push(obj);
                 })
 
                 let answerCounter = 0;
                 $("p").each(function () {
-                    // console.log($(this).html())
                     if ($(this).html().includes("Answer:")) {
                         readyQuestions[answerCounter].answer = $(this).html().replace("Answer: ", "");
-
                     } else {
                         readyQuestions[answerCounter].mark = $(this).html().replace("Mark: ", "");
+                        readyQuestions[answerCounter].quesitionNumber = answerCounter;
                         answerCounter++;
+
                     }
 
                 });
@@ -50,7 +53,7 @@ function examExtractor(path, data, Quiz, Course, res) {
                 return readyQuestions;
             }
         ).then(finalData => {
-         //   console.log(finalData)
+            console.log(finalData)
             const quiz = new Quiz({
                 name: data.name,
                 grade: data.grade,

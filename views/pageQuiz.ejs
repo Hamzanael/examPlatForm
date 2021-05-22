@@ -2,178 +2,87 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	
-	<title> Quiz</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    
-  <!-- Favicons -->
-  <link href="img/logo.png" rel="icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-	<link rel="stylesheet" type="text/css" href="css/page-quiz.css" />
+    <title> Quiz</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link href="/img/logo.png" rel="icon">
+
+    <link rel="stylesheet" type="text/css" href="/css/page-quiz.css"/>
 </head>
 
 <body>
 
-	<div id="page-wrap">
+<div id="page-wrap">
 
-		<h1>Final Quiz for ................</h1>
-		
-		<form action="pageQuiz" method="post" id="quiz">
-		
-            <ol>
-            
-                <li>
-                
-                    <h3>Data base</h3>
-                    
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-A" value="A" />
-                        <label for="question-1-answers-A">A) Computer Styled Sections </label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-B" value="B" />
-                        <label for="question-1-answers-B">B) Cascading Style Sheets</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-C" value="C" />
-                        <label for="question-1-answers-C">C) Crazy Solid Shapes</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-1-answers" id="question-1-answers-D" value="D" />
-                        <label for="question-1-answers-D">D) None of the above</label>
-                    </div>
-                
-                </li>
-                
-                <li>
-                
-                    <h3>Internet Explorer 6 was released in...</h3>
-                    
-                    <div>
-                        <input type="radio" name="question-2-answers" id="question-2-answers-A" value="A" />
-                        <label for="question-2-answers-A">A) 2001</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-2-answers" id="question-2-answers-B" value="B" />
-                        <label for="question-2-answers-B">B) 1998</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-2-answers" id="question-2-answers-C" value="C" />
-                        <label for="question-2-answers-C">C) 2006</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-2-answers" id="question-2-answers-D" value="D" />
-                        <label for="question-2-answers-D">D) 2003</label>
-                    </div>
-                
-                </li>
-                
-                <li>
-                
-                    <h3>SEO Stand for...</h3>
-                    
-                    <div>
-                        <input type="radio" name="question-3-answers" id="question-3-answers-A" value="A" />
-                        <label for="question-3-answers-A">A) Secret Enterprise Organizations</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-3-answers" id="question-3-answers-B" value="B" />
-                        <label for="question-3-answers-B">B) Special Endowment Opportunity</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-3-answers" id="question-3-answers-C" value="C" />
-                        <label for="question-3-answers-C">C) Search Engine Optimization</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-3-answers" id="question-3-answers-D" value="D" />
-                        <label for="question-3-answers-D">D) Seals End Olives</label>
-                    </div>
-                
-                </li>
-                
-                <li>
-                
-                    <h3>A 404 Error...</h3>
-                    
-                    <div>
-                        <input type="radio" name="question-4-answers" id="question-4-answers-A" value="A" />
-                        <label for="question-4-answers-A">A) is an HTTP Status Code meaning Page Not Found</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-4-answers" id="question-4-answers-B" value="B" />
-                        <label for="question-4-answers-B">B) is a good excuse for a clever design</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-4-answers" id="question-4-answers-C" value="C" />
-                        <label for="question-4-answers-C">C) should be monitored for in web analytics</label>
-                    </div>
-                    
-                    <div>
-                        <input type="radio" name="question-4-answers" id="question-4-answers-D" value="D" />
-                        <label for="question-4-answers-D">D) All of the above</label>
-                    </div>
-                
-                </li>
-                
-           
-            
-            </ol>
+    <h1>Final Quiz for <%= quiz.name %></h1>
 
-            <button type="button" id="submint" class="btn-button btn1-info btn-lg" data-toggle="modal" data-target="#myModal">
-                Submit Quiz  
-            </button>
-        </form>
+    <form action="/submitQuiz" method="post" id="quiz">
+        <ol>
+            <% quiz.quizQuestions.forEach(function (question){ %>
+                <li>
+                    <h3>
+                        <%- question.question %>
+                    </h3>
+                    <% question.choices.forEach(function (choise){ %>
+                    <div>
+                        <input type="radio" name="Q<%- question.quesitionNumber %>" id='<%- choise.coiseNumber %>'
+                               value='<%- choise.coiseNumber %>' required/>
+                        <label for='<%- choise.coiseNumber %>'>
+                            <%- choise.choise %>
+                        </label>
+                    </div>
+                    <% }) %>
+                </li>
+            <% }) %>
+            <input type="hidden" value="<%- quiz._id %>" name="quizId">
+        </ol>
+
+        <button type="submit" id="submint" class="btn-button btn1-info btn-lg" data-toggle="modal"
+                data-target="#myModal">
+            Submit Quiz
+        </button>
+    </form>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-              <div class="modal-dialog">
-              
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="logo"><img src="img/quiz1.jpg" width="100px" height="100px"  ></div>
+                </div>
+                <div class="modal-body">
+                    <div class="logo"><img src="img/quiz1.jpg" width="100px" height="100px"></div>
                     <h3>Congratulation: <span> 0/3 Score</span></h3>
                     <h2>Exam completed successfully</h2>
                     <h4>You attempt <span>2 questions </span>and from that <p> 0 answer </p> is correct</h4>
-          
-          
-                  </div>
-                  <div class="modal-footer">
+
+
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn-button btn-default" data-dismiss="modal">End</button>
-                  </div>
-                </div></div>
-		             </div>
-		
-	
-	</div>
-	
-	<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-	var pageTracker = _gat._getTracker("UA-68528-29");
-	pageTracker._initData();
-	pageTracker._trackPageview();
-	</script>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+</div>
+
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-68528-29");
+    pageTracker._initData();
+    pageTracker._trackPageview();
+</script>
 
 
 <script src="lib/jquery/jquery.min.js"></script>

@@ -35,11 +35,11 @@ mongoose.connect('mongodb://localhost:27017/QuizDB', {
 mongoose.set("useCreateIndex", true);
 
 const UserSchema = new mongoose.Schema({
+    username: String,
     email: String,
     password: String,
     googleId: String,
     quizzes: [],
-    courses: [],
     name: String,
     Role: String,
     facebookId: String
@@ -54,8 +54,9 @@ const QuizSchema = new mongoose.Schema({
     type: String,
     time: Number,
     courseName: String,
+    studentGrade: Number,
     quizQuestions: []
-});
+}, {strict: false});
 
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
@@ -86,13 +87,11 @@ const Course = new mongoose.model("course", CourseSchema);
 passport.use(User.createStrategy());
 passportConfig(passport, User, GoogleStrategy, FacebookStrategy);
 passportAuthenticationProcess(app, User, passport);
-adminOperations(app, Quiz, Course, upload);
+adminOperations(app, User, Quiz, Course, upload);
 
 app.get("/test", function (req, res) {
 
-
 });
-
 
 app.get("/", (req, res) => {
     res.render("wiseQuiz");
@@ -100,6 +99,68 @@ app.get("/", (req, res) => {
 app.get("/login", ((req, res) => {
     res.render("userLogin");
 }));
+
+app.get("/quiz/:quizName", (req, res) => {
+    if (req.isAuthenticated()) {
+        let name = req.params.quizName;
+        Quiz.findOne({name: name}, (err, quiz) => {
+            res.render("pageQuiz", {quiz: quiz});
+        });
+    } else res.redirect("/login")
+});
+
+app.post("/submitQuiz", (req, res) => {
+    let userId = req.user._id;
+    let quizId = req.body.quizId;
+    let answers = Object.values(req.body);
+    answers.pop();
+    console.log(answers);
+    Quiz.findById(quizId, (err, quiz) => {
+        let mark = 0;
+        let wrongAnswer = 0;
+        let trueAnswer = 0;
+        quiz.quizQuestions.forEach((question, index) => {
+            if (question.answer.coiseNumber === parseInt(answers[index])) {
+                mark = mark + parseInt(question.mark);
+                trueAnswer++;
+            } else wrongAnswer++;
+
+        });
+        quiz.studentGrade = mark;
+        User.findByIdAndUpdate(userId, {$push: {quizzes: quiz}}, {useFindAndModify: false}, err => {
+            User.findById(userId, (err, user) => {
+                for (let i = user.quizzes.length-1; i >= 0; i--) {
+                    let tmp= String(user.quizzes[i]._id) ;
+                    if (tmp=== quizId) {
+                        res.render("resultMark", {quiz: user.quizzes[i], answered: trueAnswer, wrong: wrongAnswer});
+                        return;
+                    }
+                }
+                console.log("ENDED FOR")
+            });
+        });
+
+    })
+
+});
+
+
 app.listen(port || 3000, function () {
     console.log("system is work on" + 3000);
 })
+
+app.get('/signup', (req, res) => {
+    User.register({
+        username: "h@adminEmail.edu.jo",
+        name: "Hamza"
+    }, "123", function (err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            passport.authenticate("local")(req, res, function () {
+                res.redirect("/adminPage");
+            });
+        }
+    })
+});
+

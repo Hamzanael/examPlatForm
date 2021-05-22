@@ -8,7 +8,7 @@ function passportAuthenticationProcess(app, User, passport) {
             if (err) {
                 console.log(err);
             } else {
-                passport.authenticate("local", {failureRedirect: '/'})(req, res, function () {
+                passport.authenticate("local", {failureRedirect: '/login'})(req, res, function () {
                     res.redirect("/");
                 });
             }
@@ -17,7 +17,7 @@ function passportAuthenticationProcess(app, User, passport) {
     });
     app.post('/signup', (req, res) => {
         User.register({
-            username: req.body.username, name: req.body.name
+            username: req.body.username, name: req.body.name,Role:"User"
         }, req.body.password, function (err, user) {
             if (err) {
                 console.log(err);
