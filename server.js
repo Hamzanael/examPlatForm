@@ -9,6 +9,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const passportAuthenticationProcess = require("./passportAuthanticationProcess");
 const passportConfig = require("./passportConfig");
+const adminOperations = require("./adminOperations");
 
 const port = process.env.PORT;
 const app = express();
@@ -37,27 +38,41 @@ const UserSchema = new mongoose.Schema({
     password: String,
     googleId: String,
     quizzes: [],
+    courses: [],
     name: String,
+    Role: String,
     facebookId: String
 }, {strict: false});
+const CourseSchema = new mongoose.Schema({
+    name: {type: String, unique: true, required: true, dropDups: true},
+    quizzes: []
+});
+const QuizSchema = new mongoose.Schema({
+    name: String,
+    grade: Number,
+    type: String,
+    time: Number,
+    courseName: String
+});
 
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
 
 const User = new mongoose.model("user", UserSchema);
+const Quiz = new mongoose.model("quiz", QuizSchema);
+const Course = new mongoose.model("course", CourseSchema);
+
 passport.use(User.createStrategy());
 passportConfig(passport, User, GoogleStrategy, FacebookStrategy);
 passportAuthenticationProcess(app, User, passport);
-
+adminOperations(app, Quiz, Course);
 
 app.get("/", (req, res) => {
     res.render("wiseQuiz");
 });
 app.get("/login", ((req, res) => {
     res.render("userLogin");
-}))
-
-
+}));
 app.listen(port || 3000, function () {
     console.log("system is work on" + 3000);
 })

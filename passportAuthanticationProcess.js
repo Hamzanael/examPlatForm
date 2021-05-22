@@ -40,11 +40,7 @@ function passportAuthenticationProcess(app, User, passport) {
         }),
         function (req, res) {
             // Successful authentication, redirect home.
-
-
             res.redirect("/");
-
-
         });
 
 
