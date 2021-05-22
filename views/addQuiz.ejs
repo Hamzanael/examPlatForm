@@ -140,9 +140,9 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="add">
                         <p> Add Quizs</p>
+                        <!-- /////////////////// addQuiz ///////////  -->
 
-
-                        <form method="post" action="/addQuiz">
+                        <form method="post" action="/addQuiz" enctype='multipart/form-data'>
                             <label for="cars">Choose a Course:</label>
                             <select name="courseName" id="Courses">
                                 <option value="computer Science">computer Science</option>
@@ -178,7 +178,7 @@
 
                             <label for="myfile"></label>
 
-                            <input type="file" id="myfile" name="myfile" accept=".docx" required><br><br>
+                            <input type="file" id="myfile" name="wordFile" accept=".docx" required><br><br>
                             <!-- <button onclick="document.getElementById('myInput').value = ''" id="add-option">Add option for Question</button> -->
 
                             <!-- <button onclick="document.getElementById('myInput').value = '' "id=add-img>Add option img Question</button> -->

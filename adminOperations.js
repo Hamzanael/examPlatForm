@@ -1,4 +1,6 @@
-function adminOperations(app,Quiz,Course){
+const examExtractor = require("./examExtractor");
+
+function adminOperations(app,Quiz,Course,upload){
 
     app.get("/adminPage", (req, res) => {
         res.render("admin");
@@ -27,23 +29,13 @@ function adminOperations(app,Quiz,Course){
         });
 
     });
-    app.post("/addQuiz", (req, res) => {
+    app.post("/addQuiz", upload.single('wordFile'),(req, res) => {
         const data = req.body;
-        const quiz = new Quiz({
-            name: data.name,
-            grade: data.grade,
-            type: data.type,
-            time: data.time,
-            courseName: data.courseName
-        });
-        quiz.save((err, doc) => {
-            if (!err) {
-                Course.findOneAndUpdate({name: data.courseName}, {$push: {quizzes: quiz}}, {useFindAndModify: false}, err => {
-                    console.log(err);
-                });
-                res.redirect("/adminPage");
-            }
-        });
+        const file = req.file
+        setTimeout(()=>{
+            examExtractor("public/uploads/"+file.filename,data,Quiz,Course,res);
+        },10000)
+
     });
     app.post("/deleteQuiz", (req, res) => {
         const data = req.body;
