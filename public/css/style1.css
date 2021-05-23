@@ -12,6 +12,11 @@
     padding: 0;
 
 }
+
+.messagesTable td{
+width: 100px;
+
+}
 body{
     background: #fff;
     width: 100%;
@@ -109,7 +114,6 @@ font-size: 1rem ;
 
 
 
-}
 .slidebar-menu li a span{
     font-size: .95rem;
     display: inline-block;
@@ -211,6 +215,11 @@ main .header-actions  .page-header{
 /*--------------
 card
 --------------------*/
+
+.card-single a{
+text-decoration: none;
+
+}
 .cards{
     /* display: grid; */
     /* grid-template-columns: repeat(3, 1fr); */
@@ -221,7 +230,8 @@ card
 .card-single{
     background: #fff;
     padding: 1rem;
-    margin-top: 8px;
+    height: 90%;
+    margin-top: 50px;
     box-shadow: 4px 4px 10px rgba(0,0, 0, 0.1);
 }
 .card-flex{

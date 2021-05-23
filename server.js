@@ -90,7 +90,7 @@ passportAuthenticationProcess(app, User, passport);
 adminOperations(app, User, Quiz, Course, upload);
 
 app.get("/test", function (req, res) {
-
+    res.render("softwareEngineer");
 });
 
 app.get("/", (req, res) => {

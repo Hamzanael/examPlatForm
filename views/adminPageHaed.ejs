@@ -1,0 +1,117 @@
+<!Doctype>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no">
+    <title>Admin </title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- css style1 link for page admin-->
+    <link rel="stylesheet" href="css/style1.css"/>
+    <!-- ------ ------------ -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo.png">
+    <!-- *************** css link  **********-->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <link rel="stylesheet" href="css/owl-carousel.css">
+
+</head>
+
+<body>
+<!-- /////////////////// start  nav-bar ///////////  -->
+
+<input type="checkbox" name="" id="slidebar-toggle">
+<div class="slidebar">
+    <div class="slidebar-brand">
+        <div class="brand-flex">
+            <img src="img/logo.png" width="40px" alt="logo">
+            <div class="brand-icon">
+             
+
+            </div>
+        </div>
+    </div>
+
+    <div class="slidebar-main">
+        <div class="slidebar-user">
+            <span class="las la-user-circle big"></span>
+            <div>
+                <h3>
+                    <%= admin.name%>
+                </h3>
+                <span>
+                    <%=admin.username%>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="slidebar-menu">
+        <div class="menu-head">
+            <span>Dashbord</span>
+            <ul>
+                <li><a href="/adminPage">
+                        <span class="las la-Balance-scale">Admin page</span> </a>
+                </li>
+                <li><a href="/adminAddCourse">
+                        <span class="las la-chart-pie"> Add Course</span></a>
+                </li>
+                <li><a href="/adminAddQuiz">
+                        <span class="las la-Balance-scale">ADD Quiz</span> </a>
+                </li>
+                <li><a href="/adminDeleteQuiz">
+                        <span class="las la-chart-pie"> Delete Quiz</span></a>
+                </li>
+                <!-- <li><a href="">
+                    <span class="las la-chart-pie"> Quiz Mark</span></a>
+              </li> -->
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- /////////////////// End  nav-bar ///////////  -->
+
+
+<!-- /////////////////// start  menu ///////////  -->
+
+
+<div class="main-content">
+
+    <header>
+
+        <div class="menu-toggle">
+            <label for="slidebar-toggle">
+                <span class="las la-bars"></span>
+            </label>
+        </div>
+        <div class="header-icon">
+            <!-- <span class="las la-search"></span>
+            <span class="las la-bookmark"></span>
+            <span class="las la-sms"></span> -->
+
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-header">
+            <div>
+                <h1>Adimn page</h1>
+                <!-- <small>Hello  Suad</small> -->
+            </div>
+            <div class="header-actions">
+                <button><span class="las la-file-export"></span>Logout</button>
+                <!-- <button><span class="las la-tools"></span>Settings</button> -->
+
+            </div>
+        </div>
