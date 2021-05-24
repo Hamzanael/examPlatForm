@@ -2,7 +2,10 @@
 
     --color-mine:#1a202e;
 }
+.center{
 
+    text-align: center;
+}
 *{
     font-family: 'Poopins', sans-serif;
     box-sizing: border-box;

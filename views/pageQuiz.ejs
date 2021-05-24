@@ -15,14 +15,14 @@
 
 <body>
 
-<div id="page-wrap">
+<div id="page-wrap" class="photoQ">
 
     <h1>Final Quiz for <%= quiz.name %></h1>
 
     <form action="/submitQuiz" method="post" id="quiz">
         <ol>
             <% quiz.quizQuestions.forEach(function (question){ %>
-                <li style="width: 100px;">
+                <li >
                     <h3>
                         <%- question.question %>
                     </h3>
@@ -40,36 +40,12 @@
             <input type="hidden" value="<%- quiz._id %>" name="quizId">
         </ol>
 
-        <button type="submit" id="submint" class="btn-button btn1-info btn-lg" data-toggle="modal"
-                data-target="#myModal">
+        <button type="submit" id="submint" class="btn-button btn1-info btn-lg" >
             Submit Quiz
         </button>
     </form>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="logo"><img src="img/quiz1.jpg" width="100px" height="100px"></div>
-                    <h3>Congratulation: <span> 0/3 Score</span></h3>
-                    <h2>Exam completed successfully</h2>
-                    <h4>You attempt <span>2 questions </span>and from that <p> 0 answer </p> is correct</h4>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-button btn-default" data-dismiss="modal">End</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 </div>

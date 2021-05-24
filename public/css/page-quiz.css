@@ -21,7 +21,11 @@ body
     
  }
 
+ .photoQ img{
+width: 400px !important;
 
+
+ }
 form{
       
    border: rgba(209, 207, 207, 0.562) 0.5px solid;
