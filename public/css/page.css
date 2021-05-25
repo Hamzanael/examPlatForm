@@ -165,7 +165,7 @@ body {
     text-decoration: none;
     transition: 0.3s;
     outline: transparent;
-    box-shadow: 0 2px 25px rgba(133, 17, 17, 0.808); */
+    box-shadow: 0 2px 25px rgba(133, 17, 17, 0.808); 
     background-color: #7e3a1b4d;
     border: 2px solid ;
   }

@@ -17,18 +17,21 @@
 
 <div id="page-wrap" class="photoQ">
 
-    <h1>Final Quiz for <%= quiz.name %></h1>
+    <h1 class="quizName">  <%= quiz.name %>  Quiz</h1>
 
     <form action="/submitQuiz" method="post" id="quiz">
+        <br>
         <ol>
             <% quiz.quizQuestions.forEach(function (question){ %>
                 <li >
+ 
                     <h3>
                         <%- question.question %>
                     </h3>
                     <% question.choices.forEach(function (choise){ %>
+                     <br>   
                     <div>
-                        <input type="radio" name="Q<%- question.quesitionNumber %>" id='<%- choise.coiseNumber %>'
+                        <input class="option-input radio" type="radio" name="Q<%- question.quesitionNumber %>" id='<%- choise.coiseNumber %>'
                                value='<%- choise.coiseNumber %>' required/>
                         <label for='<%- choise.coiseNumber %>'>
                             <%- choise.choise %>
@@ -36,9 +39,13 @@
                     </div>
                     <% }) %>
                 </li>
+                <hr>
             <% }) %>
             <input type="hidden" value="<%- quiz._id %>" name="quizId">
+
+           
         </ol>
+        
 
         <button type="submit" id="submint" class="btn-button btn1-info btn-lg" >
             Submit Quiz
