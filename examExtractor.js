@@ -36,7 +36,10 @@ function examExtractor(path, data, Quiz, Course, res) {
                 let answerCounter = 0;
                 $("p").each(function () {
                     if ($(this).html().includes("Answer:")) {
-                        readyQuestions[answerCounter].answer = $(this).html().replace("Answer: ", "");
+                        let t = $(this).html().replace("Answer: ", "");
+                        if(t===undefined) console.log("UNDEFINED")
+                        else
+                        readyQuestions[answerCounter].answer =t ;
                     } else {
                         readyQuestions[answerCounter].mark = $(this).html().replace("Mark: ", "");
                         readyQuestions[answerCounter].quesitionNumber = answerCounter;
