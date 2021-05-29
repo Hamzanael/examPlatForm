@@ -57,7 +57,11 @@ const QuizSchema = new mongoose.Schema({
     studentGrade: Number,
     quizQuestions: []
 }, {strict: false});
-
+const FeedBackSchema = new mongoose.Schema({
+   name:String,
+   email:String,
+   massage:String
+});
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
 
@@ -83,14 +87,24 @@ let upload = multer({
 const User = new mongoose.model("user", UserSchema);
 const Quiz = new mongoose.model("quiz", QuizSchema);
 const Course = new mongoose.model("course", CourseSchema);
-
+const FeedBack = new mongoose.model("feedback",FeedBackSchema);
 passport.use(User.createStrategy());
 passportConfig(passport, User, GoogleStrategy, FacebookStrategy);
 passportAuthenticationProcess(app, User, passport);
-adminOperations(app, User, Quiz, Course, upload);
+adminOperations(app, User, Quiz, Course, FeedBack,upload);
 
-app.get("/test", function (req, res) {
-    res.render("softwareEngineer");
+app.get("/courseContent/:courseId", function (req, res) {
+    let courseId = req.params.courseId;
+    Course.findById(courseId, (err, course) => {
+        res.render("courseContent", {course: course});
+    })
+
+});
+
+app.get("/allCourse", (req, res) => {
+    Course.find({}, (err, found) => {
+        res.render("showCourses", {courses: found});
+    });
 });
 
 app.get("/", (req, res) => {
@@ -100,10 +114,10 @@ app.get("/login", ((req, res) => {
     res.render("userLogin");
 }));
 
-app.get("/quiz/:quizName", (req, res) => {
+app.get("/quiz/:quizId", (req, res) => {
     if (req.isAuthenticated()) {
-        let name = req.params.quizName;
-        Quiz.findOne({name: name}, (err, quiz) => {
+        let id = req.params.quizId;
+        Quiz.findById(id, (err, quiz) => {
             res.render("pageQuiz", {quiz: quiz});
         });
     } else res.redirect("/login")
@@ -129,9 +143,9 @@ app.post("/submitQuiz", (req, res) => {
         quiz.studentGrade = mark;
         User.findByIdAndUpdate(userId, {$push: {quizzes: quiz}}, {useFindAndModify: false}, err => {
             User.findById(userId, (err, user) => {
-                for (let i = user.quizzes.length-1; i >= 0; i--) {
-                    let tmp= String(user.quizzes[i]._id) ;
-                    if (tmp=== quizId) {
+                for (let i = user.quizzes.length - 1; i >= 0; i--) {
+                    let tmp = String(user.quizzes[i]._id);
+                    if (tmp === quizId) {
                         res.render("resultMark", {quiz: user.quizzes[i], answered: trueAnswer, wrong: wrongAnswer});
                         return;
                     }
@@ -143,7 +157,27 @@ app.post("/submitQuiz", (req, res) => {
     })
 
 });
+app.get("/showQuiz/:quizId", (req, res) => {
+    if (req.isAuthenticated()) {
+        let id = req.params.quizId;
+        Quiz.findById(id, (err, quiz) => {
+            console.log(quiz);
+            res.render("showQuiz", {quiz: quiz});
+        });
+    } else res.redirect("/login");
 
+});
+
+app.post("/feedback",(req, res )=>{
+let data = req.body;
+    const tmp =  new FeedBack({
+    name:data.name,
+    email:data.email,
+    massage:data.massage
+})
+    tmp.save();
+    res.redirect("/");
+});
 
 app.listen(port || 3000, function () {
     console.log("system is work on" + 3000);
@@ -152,7 +186,8 @@ app.listen(port || 3000, function () {
 app.get('/signup', (req, res) => {
     User.register({
         username: "h@adminEmail.edu.jo",
-        name: "Hamza"
+        name: "Hamza",
+        Role: "Admin"
     }, "123", function (err, user) {
         if (err) {
             console.log(err);

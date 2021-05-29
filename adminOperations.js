@@ -1,40 +1,111 @@
 const examExtractor = require("./examExtractor");
 const passport = require("passport");
 
-function adminOperations(app, User, Quiz, Course, upload) {
+function adminOperations(app, User, Quiz, Course,FeedBack ,upload) {
 
     app.get("/adminPage", (req, res) => {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
             User.findOne({username: req.user.username}, (err, admin) => {
                 //console.log(admin);
-               res.render("admin", {admin: admin});
+                res.render("admin", {admin: admin});
             });
         } else res.redirect("/adminLogin");
     });
     app.get("/adminAddQuiz", (req, res) => {
-        if (req.isAuthenticated())
-            res.render("addQuiz");
-        else res.redirect("/adminLogin");
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+                //console.log(admin);
+                Quiz.find({}, (err, quizzes) => {
+                    res.render("addQuiz", {admin: admin, quizzes: quizzes});
+                })
+
+            });
+        } else res.redirect("/adminLogin");
     });
     app.get("/adminDeleteQuiz", (req, res) => {
-        if (req.isAuthenticated())
-            res.render("deleteQuiz");
-        else res.redirect("/adminLogin");
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+                Quiz.find({}, (err, quizzes) => {
+                    res.render("deleteQuiz", {admin: admin, quizzes: quizzes});
+                })
+                //console.log(admin);
+
+            });
+        } else res.redirect("/adminLogin");
     });
     app.get("/softwareEngineering", (req, res) => {
-        if (req.isAuthenticated())
-            res.render("softwareEngineer");
-        else res.redirect("/adminLogin");
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+                //console.log(admin);
+                res.render("softwareEngineer", {admin: admin});
+            });
+        } else res.redirect("/adminLogin");
     });
     app.get("/adminAddCourse", (req, res) => {
-        if (req.isAuthenticated())
-            res.render("addCourses")
-        else res.redirect("/adminLogin");
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+                //console.log(admin);
+                res.render("addCourses", {admin: admin});
+            });
+        } else res.redirect("/adminLogin");
     });
+
+    app.get("/showFeedBack", (req, res) => {
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+              FeedBack.find({},(error,found)=>{
+                  res.render("showFeedBack", {admin: admin,feedback:found});
+              })
+
+            });
+        } else res.redirect("/adminLogin");
+    });
+
+
+    app.get("/showAllUsers", (req, res) => {
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+                //console.log(admin);
+                User.find({Role: "User"}, (err, found) => {
+                    res.render("showUsers", {users: found, admin: admin});
+                });
+            });
+
+        } else res.redirect("/adminLogin");
+    });
+
     app.get("/adminLogin", (req, res) => {
         res.render("adminLogin")
     });
-
+    app.get("/adminLogOut", (req, res) => {
+        req.logout();
+        res.redirect('/adminLogin');
+    });
+    app.get("/deleteQuiz", (req, res) => {
+        let id = req.query.id;
+        console.log(id)
+        Quiz.findById(id, (err, found) => {
+            Course.findOneAndUpdate({name: found.courseName},
+                {$pull: {'quizzes': {'name': found.name}}},
+                {useFindAndModify: false}, err => {
+                    console.log(err);
+                });
+        });
+        Quiz.deleteOne({
+            _id: id,
+        }, {useFindAndModify: false}, err => {
+            console.log(err)
+        });
+        res.redirect("/adminPage");
+    });
+    app.get("/addAdmin", (req, res) => {
+        if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
+            User.findOne({username: req.user.username}, (err, admin) => {
+                //console.log(admin);
+                res.render("addNewAdmin", {admin: admin});
+            });
+        } else res.redirect("/adminLogin");
+    });
 
     app.post("/adminLogin", (req, res) => {
         let data = req.body
@@ -58,8 +129,11 @@ function adminOperations(app, User, Quiz, Course, upload) {
             name: req.body.name
         });
         course.save((err, doc) => {
-            if (err) res.send("This course is There");
-            else
+            if (err) {
+                User.findOne({username: req.user.username}, (err, admin) => {
+                    res.render("alertNameQuize", {admin: admin});
+                });
+            } else
                 res.redirect("/adminPage");
         });
     });
@@ -67,7 +141,7 @@ function adminOperations(app, User, Quiz, Course, upload) {
         const data = req.body;
         const file = req.file
         setTimeout(() => {
-            examExtractor("public/uploads/" + file.filename, data, Quiz, Course, res);
+            examExtractor("public/uploads/" + file.filename, data, Quiz, Course, res, req, User);
         }, 10000)
 
     });
@@ -86,6 +160,21 @@ function adminOperations(app, User, Quiz, Course, upload) {
                 console.log(err);
             });
         res.redirect("/adminPage");
+    });
+    app.post("/addNewAdmin", (req, res) => {
+        User.register({
+            username: req.body.username,
+            name: req.body.name,
+            Role: "Admin"
+        }, req.body.password, function (err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                passport.authenticate("local")(req, res, function () {
+                    res.redirect("/adminPage");
+                });
+            }
+        })
     });
 }
 

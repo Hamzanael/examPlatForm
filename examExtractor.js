@@ -2,7 +2,7 @@ const mammoth = require("mammoth");
 const cheerio = require('cheerio');
 
 
-function examExtractor(path, data, Quiz, Course, res) {
+function examExtractor(path, data, Quiz, Course, res,req,User) {
     let readyQuestions = [];
     let arrayOfQuestion = [];
     // let readyQuestions = [];
@@ -37,13 +37,16 @@ function examExtractor(path, data, Quiz, Course, res) {
                 $("p").each(function () {
                     if ($(this).html().includes("Answer:")) {
                         let t = $(this).html().replace("Answer: ", "");
-                        if(t===undefined) console.log("UNDEFINED")
+                        if (t === undefined) console.log("UNDEFINED")
                         else
-                        readyQuestions[answerCounter].answer =t ;
+                            readyQuestions[answerCounter].answer = t;
                     } else {
-                        readyQuestions[answerCounter].mark = $(this).html().replace("Mark: ", "");
+                        let t = $(this).html().replace("Mark: ", "");
+                        if (t === undefined) console.log("UNDEFINED")
+                        else{
+                        readyQuestions[answerCounter].mark = t;
                         readyQuestions[answerCounter].quesitionNumber = answerCounter;
-                        answerCounter++;
+                        answerCounter++;}
 
                     }
 
@@ -70,7 +73,10 @@ function examExtractor(path, data, Quiz, Course, res) {
                     Course.findOneAndUpdate({name: data.courseName}, {$push: {quizzes: quiz}}, {useFindAndModify: false}, err => {
                         console.log(err);
                     });
-                    res.redirect("/adminPage");
+                    User.findOne({username: req.user.username}, (err, admin) => {
+                        res.render("alertAddQuize",{admin:admin});
+                    });
+
                 }
             });
 

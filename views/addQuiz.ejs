@@ -209,43 +209,19 @@
                                 </tr>
                                 </tfoot>
                                 <tbody >
-                                <tr>
-                                    <td data-title='Provider Name'>
-                                        Computer science
-                                    </td>
-                                    <td data-title='E-mail'>
-                                        Quiz Name
-                                    </td>
-              
-                                </tr>
-                                <tr>
-                                    <td data-title='Provider Name'>
-                                        Computer science
-                                    </td>
-                                    <td data-title='E-mail'>
-                                        data base
-                                    </td>
-                              
-                                </tr>
-                                <tr>
-                                    <td data-title='Provider Name'>
-                                        Computer science
-                                    </td>
-                                    <td data-title='E-mail'>
-                                        data base
-                                    </td>
-                            
-                            
-                                </tr>
-                                <tr>
-                                    <td data-title='Provider Name'>
-                                        Computer science
-                                    </td>
-                                    <td data-title='E-mail'>
-                                       Quizzes
-                                    </td>
-                        
-                                </tr>
+                                <%quizzes.forEach(function (quiz){%>
+                                    <tr>
+                                        <td data-title='Provider Name'>
+                                            <%=quiz.courseName%>
+                                        </td>
+                                        <td data-title='E-mail'>
+                                           <%=quiz.name%>
+                                        </td>
+
+                                    </tr>
+                               <% })%>
+
+
                                 </tbody>
                             </table>
                         </main>

@@ -52,7 +52,7 @@
                 <ul>
                   <li><a href="computerNetworkSystem.html">Computer Network System</a></li>
                   <li><a href="computerScience.html">Computer Science</a></li>
-                  <li><a href="softwareEngineer.ejs">Software Engineering</a></li>
+                  <li><a href="courseContent.ejs">Software Engineering</a></li>
                   <li><a href="networkSecurite.html">Network Securite</a></li>
                 </ul>
               </li>
@@ -70,15 +70,6 @@
 
 
   </header>
-  <!-- ***** header End ***** -->
-
-
-
-
-
-
-
-  <!-- ***** Section-2 Starts ***** -->
 
   <!-- ##########  Quiz ###########-->
   <section class="section" id="Courses">
@@ -89,70 +80,21 @@
             <h2>All Courses</h2>
           </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"
-          data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
-          <div class="features-item">
-            <div class="features-1">
-              <img src="img/22.jpg">
-              <h4>Computer Science</h4>
-
-              <p>
-
-              </p>
-              <a href="ad" class="main-button">Go to quizzes</a>
-
+        <%courses.forEach(function (course){%>
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"
+               data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
+            <div class="features-item">
+              <div class="features-1">
+                <img src="img/22.jpg">
+                <h4><%=course.name%></h4>
+                <p>
+                </p>
+                <a href="/courseContent/<%=course._id%>" class="main-button">Go to quizzes</a>
+              </div>
             </div>
           </div>
-        </div>
+        <%})%>
 
-
-
-
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"
-          data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
-          <div class="features-item">
-            <div class="features-2">
-              <img src="img/44.jpg">
-              <h4>Software Engineering</h4>
-              <p>
-
-              </p>
-              <a href="ad" class="main-button">Go to quizzes</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"
-          data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
-          <div class="features-item">
-            <div class="features-3">
-              <img src="img/66.jpg">
-              <h4>Network Securite</h4>
-
-              <p>
-
-
-              </p>
-              <a href="" class="main-button">Go to quizzes</a>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12"
-          data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
-          <div class="features-item">
-            <div class="features-4">
-              <img src="img/33.jpg">
-              <h4>Computer Network System</h4>
-
-              <p>
-
-              </p>
-              <a href="ad" class="main-button">Go to quizzes</a>
-
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 

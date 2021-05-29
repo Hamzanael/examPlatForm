@@ -1,0 +1,217 @@
+<!Doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>wise quiz </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png">
+    <!-- *************** css link  **********-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+      <link rel="stylesheet" href="/css/homepage.css">
+      <link rel="stylesheet" href="/css/login-admin.css">
+
+
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  
+
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="/css/owl-carousel.css">
+    <link rel="stylesheet" href="/css/page.css">
+   
+
+</head>
+<body>
+               <!-- /////////////////// Start header   //////////////////// -->
+
+<header class="header-area header-sticky">
+  <div  class="container">
+      <div class="row">
+          <div class="col-12">
+          <nav class="main-nav">
+              <!---->
+              <a href="wiseQuiz.ejs" class="logo">
+                  <img src="/img/logo.png" width="70px" height="70px">
+              </a>
+      
+                   <!-- logo end -->
+                
+                  <ul class="nav">
+                    <li class="scroll-to-section"><a href="wiseQuiz.ejs">Home</a></li>
+                    <li class="scroll-to-section"><a href="wiseQuiz.html.#Courses">Courses</a></li>
+                    <li class="scroll-to-section"><a href="userLogin.ejs">SingUp</a>
+                    <li class="scroll-to-section"><a href="wiseQuiz.html.#Contact" >Contact</a></li>
+                      <li class="scroll-to-section"><a href="#Contact" class="menu-item">Contact Us</a></li>
+                  </ul> 
+                 <!-- <button type="submit" id="form-submit" class="login-button">login</button>-->
+
+                  <a class='menu-trigger'>
+                      <span>Menu</span>
+                  </a>
+                        </nav>
+              </div>
+          </div>
+        
+</div>
+
+
+</header>
+
+
+   <!-- /////////////////// End header   //////////////////// -->
+
+    <!-- /////////////////// start section1  //////////////////// -->
+    <section id="subject" >
+      <div class="subject-container">
+        <div class="welcom">
+        <h1>Welcome to </h1>
+        <h2>WISI quiz Apps and website</h2>      
+        <div class="btns">
+          <a href="#">
+            <!-- <i class="fa fa-play fa-3x"></i> -->
+             to dowinlode app go Google Play</a>
+        </div>
+      </div>
+      </div>
+    </section>
+    
+    <!--  end #subject--> 
+    
+  <!--==========================
+    Get Started Section
+  ============================-->
+  <section id="get-started" class="padd-section text-center">
+
+    <div class="container">
+      <div class="section-title text-center">
+
+        <h2><%course.name%></h2>
+        <p class="separator">Qiuzs for Courses </p>
+
+      </div>
+      
+      <!-- Search form -->
+      <div class="ss">
+      <form class="input-group w-auto my-auto d-none d-sm-flex">
+        <input
+          autocomplete="off"
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          style="min-width: 125px;"
+        />
+        <span class="input-group-text border-0 d-none d-lg-flex"
+          ><i class="fas fa-search"></i>
+        </span>
+      </form>
+    </div>
+    </div>
+    
+    <section class="section" id="">
+    <div class="container">
+       <div class="row">
+    <%course.quizzes.forEach(function (quiz){%>
+               <div class="col-md-6 col-lg-3">
+                   <div class="feature-block">
+                       <!--Modal: Name-->
+                       <div class="modal fade" id="modal<%=quiz._id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog modal-lg" role="document">
+
+                               <!--Content-->
+                               <div class="modal-content">
+                                   <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                   </div>
+
+
+                                   <!--Body-->
+                                   <div class="modal-body mb-0 p-0">
+
+                                       <!-- <div class="embed-responsive embed-responsive-16by9 z-depth-1-half"> -->
+                                       <div class="modal-body">
+                                           <h3>Quiz name: <small><%=quiz.name%></small></h3>
+                                           <h3>No.of Question: <small><%=quiz.quizQuestions.length%></small></h3>
+                                           <h3>Time: <small><%=quiz.time%></small></h3>
+                                           <br>
+                                       </div>
+
+                                   </div>
+
+                                   <!--Footer-->
+                                   <div class="modal-footer justify-content-center">
+                                       <a harf=""><span class="mr-4">Login</span></a>
+                                       <!-- <div class="social-media">
+                                         <ul>
+                                             <li><img title="Facebook" src="img/facebook.png" alt="images Facebook"></li>
+                                             <li><img title="Twitter" src="img/twitter.png" alt="images Twitter"></li>
+                                             <li><img title="Google" src="img/google.png" alt="images Google"></li>
+                                         </ul>
+                                     </div> -->
+                                       <a  class="btn btn-outline-primary btn-rounded
+                                       btn-md ml-4"  href="/showQuiz/<%=quiz._id%>">Start Quiz</a>
+
+                                   </div>
+
+                               </div>
+                               <!--/.Content-->
+
+                           </div>
+                       </div>
+                       <!--Modal: Name-->
+
+                       <a> <%=quiz.name%>
+                           <img class="img-fluid z-depth-1" src="/img/66.jpg" alt="img"
+                                data-toggle="modal" data-target="#modal<%=quiz._id%>" >
+                       </a>
+
+                   </div></div>
+   <%})%>
+
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <!-- Grid column -->
+   
+    <!-- Grid column -->
+   </div>
+    <!-- Grid column -->
+
+
+
+  
+       
+    </script>
+  
+  </div>
+  <!-- Grid row -->
+
+  
+    <!-- jQuery -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/js/popper.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="/js/owl-carousel.js"></script>
+    <script src="/js/scrollreveal.min.js"></script>
+    <script src="/js/waypoints.min.js"></script>
+    <script src="/js/jquery.counterup.min.js"></script>
+    <script src="/js/imgfix.min.js"></script>
+
+    <!-- Global Init -->
+    <script src="/js/custom.js"></script>
+    <!-- Plugins -->
+
+   <script src="/js/page.js"></script>
+
+
+
+</body>
+
+</html>
+
+
