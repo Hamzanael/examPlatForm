@@ -4,9 +4,7 @@
 ------------------------------------ */
 
   
- {
-    box-sizing: border-box;
-  }
+
      
   html.open, body.open {
     height: 100%;
@@ -32,7 +30,7 @@
 -----------------------
 ----------------------------
  */
- 
+
 .slidebar
 {
     width: 280px;
@@ -124,7 +122,7 @@ font-size: 1rem ;
 
 
 
-}
+
 .slidebar-menu li a span{
     font-size: .95rem;
     display: inline-block;
@@ -269,6 +267,7 @@ main .header-actions  .page-header{
   td {
     padding: 10px 10px 0;
     text-align: center;
+    color: seashell !important;
   }
   td:before {
     content: attr(data-title);

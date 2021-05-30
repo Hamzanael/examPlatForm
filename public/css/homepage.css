@@ -455,7 +455,10 @@ header
 .header-area .main-nav .menu-trigger span {
   top: 16px;
 }
-
+.marginB{
+  margin-bottom: 2rem !important;
+  
+   }
 .header-area .main-nav .menu-trigger span:before {
   -moz-transform-origin: 33% 100%;
   -ms-transform-origin: 33% 100%;

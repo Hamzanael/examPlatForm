@@ -2,6 +2,12 @@
 
     --color-mine:#1a202e;
 }
+.header{
+text-align: center;
+
+margin-bottom: .5rem;
+
+}
 .center{
 
     text-align: center;
@@ -197,7 +203,22 @@ header {
     overflow-y: hidden ; 
 
 }
+.main{
+    padding: 1.5rem ; 
+    background: #90a4ae !important;
+    height: 100%;
+    min-height: 700px !important; 
+    overflow-y: hidden ;
 
+}
+
+.marginT{
+
+    margin-top: 2rem;
+}
+.big{
+    font-size: 80px !important;
+}
 main .header-actions  .page-header{
 
     display:inline-block;

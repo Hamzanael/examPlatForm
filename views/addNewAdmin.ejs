@@ -1,32 +1,40 @@
 <%- include('adminPageHaed') -%>
+<link rel="stylesheet" href="css/style3.css"/>
+<div class="main">
+  <div class="header">
+    <h2>Add New Admin </h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="add">
+        <form class="formStyle" method="POST" action="/addNewAdmin">
+          <label for="fname">user Name</label>
+          <input type="text" id="name" name="name" placeholder="User Name for admin" required>
+          <br>
+          <br>
+          <label for="fname">Admin Email </label>
+          <input type="email" name="username" id="adminEmail" placeholder="the new Admin Email" required>
+          <br>
+          <br>
+          <br>
+          <label for="fname"> Admin Password </label>
+          <input type="password" name="password" id="adminpassword" placeholder="New  Admin Password " required>
+          <br>
+          <br>
 
-<div class="header">
-<h2>Add New Admin  </h2>
+          <button type="submit" id="add-Quiz" name="addAdmin">Add Admin</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>
-<form class="formStyle" method="POST" action="/addNewAdmin">
-<label for="fname">user Name</label>
-  <input type="text" id="name" name="name" placeholder="User Name for admin" required>
-  <br>
-  <br>
-  <label for="fname">Admin Email </label>
-  <input type="email" name="username" id="adminEmail" placeholder="the new Admin Email" required>
-  <br>
-  <br>
-  <br>
-  <label for="fname"> Admin Password </label>
-  <input type="password" name="password" id="adminpassword" placeholder="New  Admin Password " required>
-  <br>
-   <br>
+  <!-- /////////////////      End table////////////////////////// -->
+  </main>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <!-- <script  src="function.js"></script> -->
 
-   <button type="submit" id="add-Quiz" name="addAdmin">Add Admin</button>
+  </body>
 
-  </form>
-
- <!-- /////////////////      End table////////////////////////// -->
-
- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
- <!-- <script  src="function.js"></script> -->
-  
- </body>
- </html>
- 
+  </html>
