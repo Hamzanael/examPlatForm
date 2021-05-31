@@ -1,175 +1,164 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <title> Quiz</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <title>Quiz</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Favicons -->
-    <link href="/img/logo.png" rel="icon">
+    <link href="/img/quizayLogo.png" rel="icon" />
 
-    <link rel="stylesheet" type="text/css" href="/css/page-quiz.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/page-quiz.css" />
     <style>
-        article {
-            width: 300px;
-            text-align: center;
-            background-color: #68b04d;
-            border-radius: 10px;
-            margin: 50px auto 20px;
-            padding: 5px;
-            overflow: hidden;
-            box-shadow: 3px 3px 10px #ccc;
-        }
+      article {
+        width: 300px;
+        text-align: center;
+        background-color: #68b04d;
+        border-radius: 10px;
+        margin: 50px auto 20px;
+        padding: 5px;
+        overflow: hidden;
+        box-shadow: 3px 3px 10px #ccc;
+      }
 
-        article h3 {
-            padding: 10px;
-            color: #fff;
-        }
+      article h3 {
+        padding: 10px;
+        color: #fff;
+      }
 
-        article .count {
-            padding: 5px;
-        }
+      article .count {
+        padding: 5px;
+      }
 
-        article #timer {
-            padding: 5px;
-            color: crimson;
-            background-color: aliceblue;
-            border-radius: 2px;
-        }
+      article #timer {
+        padding: 5px;
+        color: crimson;
+        background-color: aliceblue;
+        border-radius: 2px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-<div id="page-wrap" class="photoQ">
-
-    <h1 class="quizName">  <%= quiz.name %> Quiz</h1>
-    <article class="clock" id="model3">
+  <body>
+    <div id="page-wrap" class="photoQ">
+      <h1 class="quizName"><%= quiz.name %> Quiz</h1>
+      <article class="clock" id="model3">
         <h3></h3>
 
         <div class="count">
-            <div id="timer"></div>
+          <div id="timer"></div>
         </div>
-    </article>
-    <form action="/submitQuiz" method="post" id="quiz" name="quizForm">
-        <br>
+      </article>
+      <form action="/submitQuiz" method="post" id="quiz" name="quizForm">
+        <br />
         <ol>
-            <% quiz.quizQuestions.forEach(function (question){ %>
-                <li>
-
-                    <h3>
-                        <%- question.question %>
-                    </h3>
-                    <% question.choices.forEach(function (choise){ %>
-                        <br>
-                        <div>
-                            <input class="option-input radio" type="radio" name="Q<%- question.quesitionNumber %>"
-                                   id='Q<%- question.quesitionNumber %><%- choise.coiseNumber %>'
-                                   value='<%- choise.coiseNumber %>' required/>
-                            <label for='<%- choise.coiseNumber %>'>
-                                <%- choise.choise %>
-                            </label>
-                        </div>
-                    <% }) %>
-                </li>
-                <hr>
+          <% quiz.quizQuestions.forEach(function (question){ %>
+          <li>
+            <h3><%- question.question %></h3>
+            <% question.choices.forEach(function (choise){ %>
+            <br />
+            <div>
+              <input
+                class="option-input radio"
+                type="radio"
+                name="Q<%- question.quesitionNumber %>"
+                id="Q<%- question.quesitionNumber %><%- choise.coiseNumber %>"
+                value="<%- choise.coiseNumber %>"
+                required
+              />
+              <label for="<%- choise.coiseNumber %>">
+                <%- choise.choise %>
+              </label>
+            </div>
             <% }) %>
-            <input type="hidden" value="<%- quiz._id %>" name="quizId">
-
-
+          </li>
+          <hr />
+          <% }) %>
+          <input type="hidden" value="<%- quiz._id %>" name="quizId" />
         </ol>
 
-
         <button type="submit" id="submint" class="btn-button btn1-info btn-lg">
-            Submit Quiz
+          Submit Quiz
         </button>
-    </form>
+      </form>
+    </div>
 
+    <script type="text/javascript">
+      var gaJsHost =
+        "https:" == document.location.protocol ? "https://ssl." : "http://www.";
+      document.write(
+        unescape(
+          "%3Cscript src='" +
+            gaJsHost +
+            "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"
+        )
+      );
+    </script>
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-68528-29");
+      pageTracker._initData();
+      pageTracker._trackPageview();
+    </script>
 
-</div>
+    <script>
+      let time = "<%= quiz.time %>";
+      time = parseInt(time);
+    </script>
 
-<script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-    var pageTracker = _gat._getTracker("UA-68528-29");
-    pageTracker._initData();
-    pageTracker._trackPageview();
-</script>
+    <script>
+      function fillAnswers() {
+          <% quiz.quizQuestions.forEach(function (question){ %>
+          var checkRadio = document.querySelector(
+              'input[name="Q<%-question.quesitionNumber%>"]:checked');
+          if(checkRadio != null) {
 
-<script>
-    let time = "<%= quiz.time %>";
-    time = parseInt(time);
+          }
+          else {
+              console.log("Unchecked")
+              document.getElementById("Q<%- question.quesitionNumber %>0").checked =true;
+          }
+          <%})%>
+      }
+    </script>
 
-</script>
+    <script>
+      var h3 = document.getElementsByTagName("h3");
+      h3[0].innerHTML = "Exam Timer";
 
-
-<script>
-    function fillAnswers() {
-        <% quiz.quizQuestions.forEach(function (question){ %>
-        var checkRadio = document.querySelector(
-            'input[name="Q<%-question.quesitionNumber%>"]:checked');
-        if(checkRadio != null) {
-
-        }
-        else {
-            console.log("Unchecked")
-            document.getElementById("Q<%- question.quesitionNumber %>0").checked =true;
-        }
-        <%})%>
-    }
-</script>
-
-
-<script>
-    var h3 = document.getElementsByTagName("h3");
-    h3[0].innerHTML = "Exam Timer";
-
-    var sec = time*60,
+      var sec = time * 60,
         countDiv = document.getElementById("timer"),
         secpass,
         countDown = setInterval(function () {
-            'use strict';
-            secpass();
+          "use strict";
+          secpass();
         }, 1000);
 
-    function secpass() {
-        'use strict';
+      function secpass() {
+        "use strict";
 
         var min = Math.floor(sec / 60),
-            remSec = sec % 60;
+          remSec = sec % 60;
 
         if (remSec < 10) {
-            remSec = '0' + remSec;
+          remSec = "0" + remSec;
         }
         if (min < 10) {
-
-            min = '0' + min;
-
+          min = "0" + min;
         }
         countDiv.innerHTML = min + ":" + remSec;
 
         if (sec > 0) {
-
-            sec = sec - 1;
-
+          sec = sec - 1;
         } else {
-            clearInterval(countDown);
-            countDiv.innerHTML = 'Exam is Finished';
-            fillAnswers();
-            document.getElementById("quiz").submit();
+          clearInterval(countDown);
+          countDiv.innerHTML = "Exam is Finished";
+          fillAnswers();
+          document.getElementById("quiz").submit();
         }
-    }
+      }
+    </script>
 
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
-
-</body>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </body>
 </html>
