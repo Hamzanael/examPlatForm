@@ -175,10 +175,10 @@ h4 span{
 }
 .input-icon {
   position: absolute;
-  top: 0;
+  top: 8px;
   left: 18px;
   height: 48px;
-  font-size: 24px;
+  font-size: 30px;
   line-height: 48px;
   text-align: left;
   color: #000;
