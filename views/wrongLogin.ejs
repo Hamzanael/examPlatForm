@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login/Signup </title>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/login-admin.css"/>
+    <!-- ------------------ -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/quizayLogo.png">
+    <!-- *************** css link  **********-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+
+    <link rel="stylesheet" href="css/owl-carousel.css">
+
+</head>
+
+<body>
+
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!---->
+                    <a href="/wiseQuiz" class="logo">
+                        <img src="img/quizayLogo.png" width="70px" height="70px">
+                    </a>
+
+                    <!-- logo end -->
+
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="wiseQuiz.ejs">Home</a></li>
+                        
+                        <li class="scroll-to-section"><a href="userLogin.ejs">SingUp</a>
+                        <li class="scroll-to-section"><a href="wiseQuiz.html.#Contact">About </a>
+
+                        </li>
+                        <li class="scroll-to-section"><a href="wiseQuiz.html.#Courses">All Courses</a></li>
+                        <li class="scroll-to-section"><a href="wise quiz.html.#Contact">Contact Us</a></li>
+                    </ul>
+                    <!-- <button type="submit" id="form-submit" class="login-button">login</button>-->
+
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+
+</header>
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h6 class="mb-0 pb-3">
+                    </h6>
+
+                    <div class="alert alert-danger marginT" role="alert">
+                      <h3> the email or password is incorrect, please try again.</h3>
+                    </div>
+
+                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+
+                    <label for="reg-log"></label>
+
+
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+
+                                        <h4 class="mb-4 pb-3">Create Account</h4>
+                                        <form method="POST" action="/signUp">
+                                            <div class="form-group">
+                                                <input type="text" name="name" class="form-style"
+                                                       placeholder="Your Full Name" id="logname" autocomplete="off"
+                                                       required>
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="email" name="username" class="form-style"
+                                                       placeholder="Your Email" id="logemail" autocomplete="off"
+                                                       required>
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="password" class="form-style"
+                                                       placeholder="Your Password" id="logpass" autocomplete="off"
+                                                       required>
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <input class="checkbox btn1 mt-4" type="submit" value="signup" id="reg-log" na
+                                                   me="reg-log"/>
+
+                                            <label for="reg-log">Login</label>
+                                        </form>
+
+                                        </label>
+
+
+                                    </div>
+                                    <br>
+
+                                    <div class="social-media">
+                                        <ul>
+                                            <li><a href="/auth/facebook"> <img title="Facebook" src="img/facebook.png"
+                                                                               alt="images Facebook"></a></li>
+
+                                            <li><a href="/auth/google"><img title="Google" src="img/google.png"
+                                                                            alt="images Google"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <form method="POST" action="/Login">
+                                <div class="card-back">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Login</h4>
+                                            <div class="form-group mt-2">
+                                                <input type="email" name="username" class="form-style"
+                                                       placeholder="Your Email" id="logemail" autocomplete="off"
+                                                       required>
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="password" class="form-style"
+                                                       placeholder="Your Password" id="logpass" autocomplete="off"
+                                                       required>
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+
+                                            
+                                            <input class="checkbox btn1 mt-4" type="submit" value="Login"  id="reg-log" na
+                                                   me="reg-log"/>
+
+                                            <label for="reg-log">SingUp</label>
+                                            </label>
+                                            <div class="social-media">
+                                                <ul>
+                                                    <li><a href="/auth/facebook"> <img title="Facebook"
+                                                                                       src="img/facebook.png"
+                                                                                       alt="images Facebook"></a></li>
+                                                    <li><a href="/auth/google"><img title="Google" src="img/google.png"
+                                                                                    alt="images Google"></a></li>
+                                                </ul>
+                                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="footer-dark">
+    <footer id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="wise quiz.html.#Courses">Courses</a></li>
+                        <li><a href="#">Quiz page</a></li>
+                        <li><a href="wise quiz.html.#Contact">Contact Us</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+
+                        <li><a href="wise quiz.html">Web WISE Quiz </a></li>
+                        <li><a href="wise quiz.html">App WISE Quiz</a></li>
+                        <li><a href="#">Login In</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>Company Name</h3>
+                    <p>Wise Quiz app and website</p>
+                </div>
+
+                <div class="social-media">
+                    <ul>
+                        <a href="wise quiz.html">
+                            <li><img title="WISE quiz " src="img/quizayLogo.png" alt="images WISE QUIZ"></li>
+                        </a>
+                        <a href="">
+                            <li><img title="Twitter" src="img/twitter.png" alt="images Twitter"></li>
+                        </a>
+                        <a href="">
+                            <li><img title="Google" src="img/google.png" alt="images Google"></li>
+                        </a>
+                        <a href="">
+                            <li><img title="facebook" src="img/facebook.png" alt="images facebook"></li>
+                        </a>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+</div>
+</footer>
+</div>
+
+
+<!-- jQuery -->
+<script src="js/jquery-2.1.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Plugins -->
+<script src="js/owl-carousel.js"></script>
+<script src="js/scrollreveal.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.counterup.min.js"></script>
+<script src="js/imgfix.min.js"></script>
+
+<!-- Global Init -->
+<script src="js/custom.js"></script>
+
+
+</body>
+</html>
