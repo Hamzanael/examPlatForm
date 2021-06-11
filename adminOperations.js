@@ -1,7 +1,7 @@
 const examExtractor = require("./examExtractor");
 const passport = require("passport");
 
-function adminOperations(app, User, Quiz, Course,FeedBack ,upload) {
+function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
 
     app.get("/adminPage", (req, res) => {
         if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
@@ -53,9 +53,9 @@ function adminOperations(app, User, Quiz, Course,FeedBack ,upload) {
     app.get("/showFeedBack", (req, res) => {
         if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
             User.findOne({username: req.user.username}, (err, admin) => {
-              FeedBack.find({},(error,found)=>{
-                  res.render("showFeedBack", {admin: admin,feedback:found});
-              })
+                FeedBack.find({}, (error, found) => {
+                    res.render("showFeedBack", {admin: admin, feedback: found});
+                })
 
             });
         } else res.redirect("/adminLogin");
@@ -131,7 +131,7 @@ function adminOperations(app, User, Quiz, Course,FeedBack ,upload) {
         course.save((err, doc) => {
             if (err) {
                 User.findOne({username: req.user.username}, (err, admin) => {
-                    res.render("alertNameQuize", {admin: admin});
+                    res.render("alertAddCourses", {admin: admin});
                 });
             } else
                 res.redirect("/adminPage");
@@ -159,7 +159,7 @@ function adminOperations(app, User, Quiz, Course,FeedBack ,upload) {
             {useFindAndModify: false}, err => {
                 console.log(err);
             });
-        res.redirect("/adminPage");
+        res.render("alertDeleteQuiz");
     });
     app.post("/addNewAdmin", (req, res) => {
         User.register({

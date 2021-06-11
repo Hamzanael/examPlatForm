@@ -58,9 +58,9 @@ const QuizSchema = new mongoose.Schema({
     quizQuestions: []
 }, {strict: false});
 const FeedBackSchema = new mongoose.Schema({
-   name:String,
-   email:String,
-   massage:String
+    name: String,
+    email: String,
+    massage: String
 });
 UserSchema.plugin(passportLocalMongoose);
 UserSchema.plugin(findOrCreate);
@@ -87,11 +87,11 @@ let upload = multer({
 const User = new mongoose.model("user", UserSchema);
 const Quiz = new mongoose.model("quiz", QuizSchema);
 const Course = new mongoose.model("course", CourseSchema);
-const FeedBack = new mongoose.model("feedback",FeedBackSchema);
+const FeedBack = new mongoose.model("feedback", FeedBackSchema);
 passport.use(User.createStrategy());
 passportConfig(passport, User, GoogleStrategy, FacebookStrategy);
 passportAuthenticationProcess(app, User, passport);
-adminOperations(app, User, Quiz, Course, FeedBack,upload);
+adminOperations(app, User, Quiz, Course, FeedBack, upload);
 
 app.get("/courseContent/:courseId", function (req, res) {
     let courseId = req.params.courseId;
@@ -102,27 +102,47 @@ app.get("/courseContent/:courseId", function (req, res) {
 });
 
 app.get("/allCourse", (req, res) => {
-    Course.find({}, (err, found) => {
-        res.render("showCourses", {courses: found});
-    });
+    if (req.isAuthenticated()) {
+        let userId = req.user._id;
+        User.findById(userId, (error, user) => {
+            Course.find({}, (err, found) => {
+                res.render("showCourses", {logged: true, user: user, courses: found});
+            });
+        });
+
+    } else {
+        Course.find({}, (err, found) => {
+            res.render("showCourses", {courses: found, logged: false});
+        });
+    }
+
+
 });
 
 app.get("/", (req, res) => {
-    res.render("wiseQuiz");
+    renderPages(req, res, "wiseQuiz");
 });
 app.get("/login", ((req, res) => {
-    res.render("userLogin");
+    renderPages(req, res, "userLogin");
+
 }));
 
 app.get("/quiz/:quizId", (req, res) => {
     if (req.isAuthenticated()) {
         let id = req.params.quizId;
+        let userId = req.user._id;
         Quiz.findById(id, (err, quiz) => {
-            res.render("pageQuiz", {quiz: quiz});
+            User.findById(userId, (error, user) => {
+                res.render("pageQuiz", {quiz: quiz, logged: true, user: user});
+            })
+
         });
     } else res.redirect("/login")
 });
-
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect('/');
+})
 app.post("/submitQuiz", (req, res) => {
     let userId = req.user._id;
     let quizId = req.body.quizId;
@@ -160,21 +180,25 @@ app.post("/submitQuiz", (req, res) => {
 app.get("/showQuiz/:quizId", (req, res) => {
     if (req.isAuthenticated()) {
         let id = req.params.quizId;
+        let userId = req.user._id;
         Quiz.findById(id, (err, quiz) => {
-            console.log(quiz);
-            res.render("showQuiz", {quiz: quiz});
+            User.findById(userId, (error, user) => {
+                res.render("showQuiz", {logged: true, user: user, quiz: quiz})
+            });
         });
     } else res.redirect("/login");
 
 });
-
-app.post("/feedback",(req, res )=>{
-let data = req.body;
-    const tmp =  new FeedBack({
-    name:data.name,
-    email:data.email,
-    massage:data.massage
-})
+app.get("/loginFail", (req, res) => {
+    renderPages(req, res, "wrongLogin");
+});
+app.post("/feedback", (req, res) => {
+    let data = req.body;
+    const tmp = new FeedBack({
+        name: data.name,
+        email: data.email,
+        massage: data.massage
+    })
     tmp.save();
     res.redirect("/");
 });
@@ -199,3 +223,12 @@ app.get('/signup', (req, res) => {
     })
 });
 
+function renderPages(req, res, name) {
+    if (req.isAuthenticated()) {
+        let userId = req.user._id;
+        User.findById(userId, (error, user) => {
+            res.render(name, {logged: true, user: user})
+        });
+
+    } else res.render(name, {logged: false})
+}

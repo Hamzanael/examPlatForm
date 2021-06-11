@@ -78,6 +78,7 @@ function examExtractor(path, data, Quiz, Course, res,req,User) {
                     });
 
                 }
+                else res.render("alertNameQuize");
             });
 
         });

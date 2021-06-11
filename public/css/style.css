@@ -131,7 +131,9 @@ font-size: 1rem ;
 
 }
 
-
+label{
+    color: black;
+}
 .slidebar-menu li{
     margin-bottom: .9rem;
 

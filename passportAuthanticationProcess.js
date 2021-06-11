@@ -8,7 +8,7 @@ function passportAuthenticationProcess(app, User, passport) {
             if (err) {
                 console.log(err);
             } else {
-                passport.authenticate("local", {failureRedirect: '/login'})(req, res, function () {
+                passport.authenticate("local", {failureRedirect: '/loginFail'})(req, res, function () {
                     res.redirect("/");
                 });
             }
