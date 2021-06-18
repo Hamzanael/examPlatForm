@@ -95,9 +95,21 @@ adminOperations(app, User, Quiz, Course, FeedBack, upload);
 
 app.get("/courseContent/:courseId", function (req, res) {
     let courseId = req.params.courseId;
-    Course.findById(courseId, (err, course) => {
-        res.render("courseContent", {course: course});
-    })
+   
+    if (req.isAuthenticated()) {
+        let userId = req.user._id;
+        User.findById(userId, (error, user) => {
+            Course.findById(courseId, (err, course) => {
+                res.render("courseContent", {course: course, logged: true , user: user});
+            })
+        });
+
+    } else {
+        Course.find({}, (err, found) => {
+            res.render("showCourses", {courses: found, logged: false});
+        });
+    }
+
 
 });
 
@@ -203,7 +215,7 @@ app.post("/feedback", (req, res) => {
     res.redirect("/");
 });
 
-app.listen(port || 3000, function () {
+app.listen(port || 80, function () {
     console.log("system is work on" + 3000);
 })
 
