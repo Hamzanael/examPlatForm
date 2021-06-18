@@ -109,9 +109,10 @@ h1{
    position: absolute;
    content: '•';
    display: inline-block;
-   font-size: 30.66667px;
+   font-size: 35.66667px;
    text-align: center;
    line-height: 23px;
+   margin-bottom: 10px !important;
  }
  .option-input:checked::after {
    -webkit-animation: click-wave 0.65s;

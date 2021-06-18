@@ -243,7 +243,7 @@ header
   left: 0px;
   right: 0px;
   z-index: 100;
-  height: 100px;
+  height: 80px;
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
@@ -509,6 +509,7 @@ header
 
 .header-area.header-sticky {
   min-height: 80px;
+  background-color: white;
 }
 
 .header-area.header-sticky .nav {
@@ -636,10 +637,15 @@ Download applications
   width: 100%;
   height: 100vh;
   min-height: 793px;
-  background-image: url(../img/000000.png) ;
+  background-image: url(../img/home.jpeg) ;
   background-size: cover;
   background-repeat: no-repeat;
   background-position:  top right ;
+}
+
+.la-user-circle{
+
+  font-size: 18px;
 }
 
 .Download-app .header-text .left-text {
@@ -647,6 +653,7 @@ Download applications
   align-self: center;
   margin-top: 35%;
   transform: perspective(1px) translateY(-30%) !important;
+  color: #000 !important;
 }
 
 .Download-app .header-text h1 {
@@ -706,13 +713,20 @@ Download applications
 @media (max-width: 810px) {
   .Download-app {
     background-size: contain;
+    margin-top: 5rem;
   }
 
   .Download-app .header-text {
-    padding-top: 100%;
+    padding-top: 150px;
     margin-left: 0;
   }
     
+  .Download-app .header-text .left-text {
+    margin-top: 50%;
+   
+  
+    transform: none !important;
+  }
   .container-fluid .col-md-12 {
     margin-right: 0px;
     padding-right: 0px;
