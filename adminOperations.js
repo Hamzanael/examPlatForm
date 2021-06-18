@@ -96,7 +96,7 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
         }, {useFindAndModify: false}, err => {
             console.log(err)
         });
-        res.redirect("/adminPage");
+        res.redirect("/adminDeleteQuiz");
     });
     app.get("/addAdmin", (req, res) => {
         if (req.isAuthenticated() && req.user.Role.includes("Admin")) {
@@ -129,7 +129,7 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
             name: req.body.name
         });
         course.save((err, doc) => {
-            if (err) {
+            if (!err) {
                 User.findOne({username: req.user.username}, (err, admin) => {
                     res.render("alertAddCourses", {admin: admin});
                 });
@@ -171,7 +171,7 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
                 console.log(err);
             } else {
                 passport.authenticate("local")(req, res, function () {
-                    res.redirect("/adminPage");
+                    res.render("alertNewAdmin");
                 });
             }
         })

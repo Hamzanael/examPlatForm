@@ -105,9 +105,9 @@ app.get("/courseContent/:courseId", function (req, res) {
         });
 
     } else {
-        Course.find({}, (err, found) => {
-            res.render("showCourses", {courses: found, logged: false});
-        });
+        Course.findById(courseId, (err, course) => {
+            res.render("courseContent", {course: course, logged: false });
+        })
     }
 
 
