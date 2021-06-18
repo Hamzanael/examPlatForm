@@ -222,7 +222,7 @@ app.listen(port || 80, function () {
 app.get('/signup', (req, res) => {
     User.register({
         username: "h@adminEmail.edu.jo",
-        name: "Hamza",
+        name: "Yehya",
         Role: "Admin"
     }, "123", function (err, user) {
         if (err) {
