@@ -27,10 +27,9 @@
                         <form method="post" action="/addQuiz" enctype='multipart/form-data'>
                             <label for="cars">Choose a Course:</label>
                             <select name="courseName" id="Courses">
-                                <option value="computer Science">computer Science</option>
-                                <option value="Software Engineering">Software Engineering</option>
-                                <option value="Network Securite">Network Securite</option>
-                                <option value="Computer Network">Computer Network</option>
+                                <%courses.forEach(function (course){%>
+                                    <option value="<%=course.name%>"><%=course.name%></option>
+                                <%})%>
                             </select>
                             <label for="fname">Quizes Name</label>
                             <input type="text" id="subjectName" name="name" placeholder="Name of Quiz" required>
