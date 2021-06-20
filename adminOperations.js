@@ -16,7 +16,10 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
             User.findOne({username: req.user.username}, (err, admin) => {
                 //console.log(admin);
                 Quiz.find({}, (err, quizzes) => {
-                    res.render("addQuiz", {admin: admin, quizzes: quizzes});
+                    Course.find({}, (error, courses) => {
+                        res.render("addQuiz", {admin: admin, quizzes: quizzes, courses: courses});
+                    })
+
                 })
 
             });
@@ -142,7 +145,9 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
                     res.render("alertAddCourses", {admin: admin});
                 });
             } else
-                res.redirect("/adminPage");
+                User.findOne({username: req.user.username}, (err, admin) => {
+                    res.render("alertNameQuize", {admin: admin});
+                });
         });
     });
     app.post("/addQuiz", upload.single('wordFile'), (req, res) => {
@@ -155,6 +160,7 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
     });
     app.post("/deleteQuiz", (req, res) => {
         const data = req.body;
+        const id = req.user._id;
         Quiz.deleteOne({
             name: data.name,
             type: data.type,
@@ -167,7 +173,9 @@ function adminOperations(app, User, Quiz, Course, FeedBack, upload) {
             {useFindAndModify: false}, err => {
                 console.log(err);
             });
-        res.render("alertDeleteQuiz");
+        User.findOne({username: req.user.username}, (err, admin) => {
+                res.render("alertDeleteQuiz", {admin: admin});
+            })
     });
     app.post("/addNewAdmin", (req, res) => {
         User.register({
