@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="add">
-        <form class="formStyle" method="POST" action="/addNewAdmin">
+        <form name="f" class="formStyle" method="POST" action="/addNewAdmin" onsubmit="return check();">
           <label for="fname">user Name</label>
           <input type="text" id="name" name="name" placeholder="User Name for admin" required>
           <br>
@@ -32,6 +32,23 @@
 </div>
   <!-- /////////////////      End table////////////////////////// -->
   </main>
+
+  <script>
+    function check(){
+     text = document.f.username.value;
+       text=text.trim();
+         if(text.includes("@adminEmail.edu.jo")==false)  
+         {window.alert("the email domain must be like this : yahya@adminEmail.edu.jo");
+           return false;
+    }else{
+
+      return true;
+    }
+
+
+          }
+
+  </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <!-- <script  src="function.js"></script> -->
 

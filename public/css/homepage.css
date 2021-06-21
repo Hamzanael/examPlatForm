@@ -18,7 +18,12 @@ figure, header, nav, section, article, aside, footer, figcaption {
   outline: 0;
 
 }
-
+.la-android{
+  color: greenyellow;
+  font-size: 64px;
+  background-color: gray;
+  border-radius: 50%;
+    }
 .clearfix:after {
   content: ".";
   display: block;
@@ -46,8 +51,11 @@ ul, li {
   list-style: none;
 }
 
+
+
 header, nav, section, article, aside, footer, hgroup {
   display: block;
+ 
 }
 
 * {
@@ -555,6 +563,8 @@ header
   .header-area .main-nav {
     overflow: hidden;
   }
+
+ 
   .header-area .main-nav .nav {
     float: none;
     width: 100%;
@@ -565,6 +575,7 @@ header
     -o-transition: all 0s ease 0s;
     transition: all 0s ease 0s;
     margin-left: 0px;
+    position: absolute;
   }
   .header-area .main-nav .nav li:first-child {
     border-top: 1px solid #eee;
@@ -716,6 +727,7 @@ Download applications
     margin-top: 5rem;
   }
 
+  
   .Download-app .header-text {
     padding-top: 150px;
     margin-left: 0;
